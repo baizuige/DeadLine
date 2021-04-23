@@ -1,0 +1,185 @@
+@font-face {
+    font-family: DroidSansMono;
+    src: url(../font/DroidSansMono-1.ttf);
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: DroidSansMono;
+    user-select:none;
+    outline: 1px solid #ff0000;
+}
+body{
+    min-height: 100vh;
+    display: flex;
+}
+nav{
+    width: 216px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #dfe6e9;
+}
+nav .logo{
+    margin-top: 30px;
+    width: 180px;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+nav .nav-links{
+    /* margin-top: 30px; */
+    width: 100%;
+    height: 60%;
+    padding-left: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+nav .nav-item{
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0 10px 10px;
+    color: #999;
+    cursor: pointer;
+    fill:currentColor;
+    transition: all .3s linear;
+}
+nav .nav-item:hover{
+    background: #bdc3c7;
+}
+.img-box,nav .nav-item .nav-item-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+nav .nav-item .img-box svg{
+    width: 28px;
+    height: 28px;
+}
+nav .nav-item .nav-item-title{
+    margin-left: 16px;
+    font-size: 18px;
+}
+nav .active{
+    background: #ffffff !important;
+    border-radius: 25px 0 0 25px;
+    box-shadow: -3px 5px 3px #ccc;
+    color: #111;
+    fill: #f39c12;
+    font-weight: 700;
+}
+main{
+    flex: 1;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+}
+main>header{
+    height: 96px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+main>header .header-hello{
+    font-size: 32px;
+    font-weight: 300;
+}
+main>header .header-hello span{
+    font-weight: 900;
+}
+main>header .header-right{
+    min-width: 280px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+main>header .search, main>header .remind{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #dfe6e9;
+    padding: 5px;
+    border-radius: 7px;
+}
+main>header .search svg, main>header .remind svg{
+    width: 24px;
+    height: 24px;
+    
+}
+main .main{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.main .main-left,.main .main-right{
+    width: 47%;
+}
+.main .main-header{
+    display: flex;
+    height: 42px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.main-header .main-header-left{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.main-header-left .main-header-title{
+    font-size: 18px;
+    font-weight: bold;
+}
+.main-header-left .main-header-direction{
+    font-size: 12px;
+    color: #999;
+}
+.main-header-right .select-date{
+    min-width: 160px;
+    display: flex;
+    padding: 5px 10px;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid #999;
+    border-radius: 18px;
+    color: #999;
+}
+.select-date-num{
+    display: flex;
+    align-items: center;
+}
+.main-header-right svg{
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+.main-left .timetable{
+    height: 500px;
+    overflow:scroll;
+}
+.main-left .timetable ul{
+    list-style: none;
+}
+.timetable ul li{
+    height: 120px;
+    display: flex;
+    align-items: center;
+}
+.timetable ul li div:nth-of-type(2){
+    margin-left: 20px;
+    height: 1px;
+    width: 300px;
+    background: #000;
+}
+footer{
+    width: 218px;
+    box-sizing: border-box;
+    border-left: 2px solid #bdc3c7;
+}
