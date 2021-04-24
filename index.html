@@ -82,12 +82,6 @@
                 </div>
                 <div class="timetable">
                     <ul>
-                        <li><div>00:00</div><div></div></li>
-                        <li><div>01:00</div><div></div></li>
-                        <li><div>02:00</div><div></div></li>
-                        <li><div>03:00</div><div></div></li>
-                        <li><div>04:00</div><div></div></li>
-                        <li><div>05:00</div><div></div></li>
                         <li><div>06:00</div><div></div></li>
                         <li><div>07:00</div><div></div></li>
                         <li><div>08:00</div><div></div></li>
@@ -106,7 +100,19 @@
                         <li><div>21:00</div><div></div></li>
                         <li><div>22:00</div><div></div></li>
                         <li><div>23:00</div><div></div></li>
+                        <li><div>00:00</div><div></div></li>
                     </ul>
+                    <div class="class-list">
+                        <!-- <div class="class-item gll">
+                            <div class="img-box class-img">
+                                <svg t="1619231376881" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1334" width="32" height="32"><path d="M380.3 192.5c-40.9-12.8-77.6-20.9-109.1-24.1-47.9-4.8-81.7 2-103.5 20.8-24.9 21.5-26.4 53-23 76.3v400.2c0 12.1 9.6 20.8 19.5 28.7 7.8 6.2 18.6 13.9 33 23.4 23.4 15.5 55.8 35.5 96.5 59.7 69 40.9 138.9 80 139.6 80.3l4.5 2.5h5.2c17.2 0 33.7-9.7 46.4-27.2 10.2-14.1 16.4-31 16.4-45.2V316.4c0.1-31.6-16.2-89.7-125.5-123.9z m85.6 595.4c0 4.7-3.1 13.9-8.7 21.7-3.4 4.7-7.2 8.2-10.5 9.8-17.5-9.8-69.4-39.1-122.7-70.6-103.1-60.8-131.4-82.4-139.1-89.4v-397l-0.2-1.5c-4.6-29.3 5.9-38.4 9.4-41.4 23.2-20 88.4-15.8 174.4 11.2 62.9 19.7 97.5 50.1 97.5 85.7v471.5z m428.5-122.3V264c0-24.2-9.2-45.1-26.7-60.4-21-18.4-53.5-28.8-96.7-31.1-30.5-1.6-55.4 1.7-56.5 1.8l-0.8 0.1c-61 10.6-104.2 36.2-129.7 55.8-24.6 18.9-50.8 46.9-50.8 68.7v489c0 29.2 26.4 72.4 62.8 72.4h5.2l4.5-2.5c0.7-0.4 70.6-39.4 139.6-80.3 40.7-24.1 73.1-44.2 96.5-59.7 14.4-9.5 25.2-17.2 33-23.4 10-8 19.6-16.7 19.6-28.8z m-40-6.2c-7.7 7-36.1 28.6-139.1 89.4-53.3 31.4-105.3 60.8-122.8 70.6-3.3-1.6-7.1-5.1-10.5-9.8-5.7-7.8-8.7-17-8.7-21.7V300c1.7-5 13.3-22.2 39.3-41.3 21.4-15.6 57.4-36.1 107.6-44.9 24.3-3.1 92.2-5.6 121.1 19.7 8.9 7.8 13 17.4 13 30.3v395.6z" fill="#333333" p-id="1335"></path><path d="M109 264H69v427.4l75.7 75.7 28.3-28.3-64-64z m815.3 0v410.8l-64 64 28.3 28.3 75.7-75.7V264zM248.736 386.422l13.112-37.788 144.539 50.153-13.112 37.788z m-7.098 186.321l13.112-37.788 144.539 50.154-13.112 37.788z m389.465-173.962l144.554-50.153 13.112 37.792-144.554 50.153z m7.099 186.309l144.554-50.153 13.112 37.792-144.554 50.153z" fill="#333333" p-id="1336"></path></svg>
+                            </div>
+                            <div class="class-detail">
+                                <div class="class-title">概率论</div>
+                                <div class="class-time">10:00-10:45</div>
+                            </div>
+                        </div> -->
+                    </div>
                 </div>
             </div>
             <div class="main-right">
@@ -122,6 +128,7 @@
     <footer></footer>
 </body>
 <script>
+    // 为nav点击后切换样式
     let nav_link = document.querySelector('.nav-links');
     nav_link.classList
     nav_link.addEventListener('click',(e)=>{
@@ -135,6 +142,57 @@
             }
             n.classList.add('active');
         }
-    })
+    });
+
+    //设置timetable以及class_list的高度
+    const main_left = document.querySelector('.main-left');
+    const main_header = document.querySelector('.main-header');
+    const timetable = document.querySelector('.timetable');
+    const class_list = document.querySelector('.class-list');
+    timetable.style.height = main_left.clientHeight - main_header.clientHeight -30 + 'px';
+    class_list.style.height = timetable.scrollHeight + 'px';
+
+    //设置每个class_item应该固定的位置
+    
+
+    const url = 'http://127.0.0.1:8090';
+    let classdata = '';
+    (async ()=>{
+        let response = await fetch(url+'/classlist?date=20210426',{
+            method:'GET'
+        });
+        classdata = await response.json();
+        if(classdata){
+            for(let v of classdata){
+                let item = document.createElement('div');
+                let img = document.createElement('div');
+                let detail = document.createElement('div');
+                let title = document.createElement('div');
+                let time = document.createElement('div');
+                title.innerHTML = v.classname;
+                title.classList.add('class-title');
+                time.innerHTML = v.time;
+                time.classList.add('class-time');
+                detail.append(title);
+                detail.append(time);
+                detail.classList.add('class-detail');
+                img.classList.add('img-box');
+                img.classList.add('class-img');
+                img.innerHTML = '<svg t="1619231376881" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1334" width="32" height="32"><path d="M380.3 192.5c-40.9-12.8-77.6-20.9-109.1-24.1-47.9-4.8-81.7 2-103.5 20.8-24.9 21.5-26.4 53-23 76.3v400.2c0 12.1 9.6 20.8 19.5 28.7 7.8 6.2 18.6 13.9 33 23.4 23.4 15.5 55.8 35.5 96.5 59.7 69 40.9 138.9 80 139.6 80.3l4.5 2.5h5.2c17.2 0 33.7-9.7 46.4-27.2 10.2-14.1 16.4-31 16.4-45.2V316.4c0.1-31.6-16.2-89.7-125.5-123.9z m85.6 595.4c0 4.7-3.1 13.9-8.7 21.7-3.4 4.7-7.2 8.2-10.5 9.8-17.5-9.8-69.4-39.1-122.7-70.6-103.1-60.8-131.4-82.4-139.1-89.4v-397l-0.2-1.5c-4.6-29.3 5.9-38.4 9.4-41.4 23.2-20 88.4-15.8 174.4 11.2 62.9 19.7 97.5 50.1 97.5 85.7v471.5z m428.5-122.3V264c0-24.2-9.2-45.1-26.7-60.4-21-18.4-53.5-28.8-96.7-31.1-30.5-1.6-55.4 1.7-56.5 1.8l-0.8 0.1c-61 10.6-104.2 36.2-129.7 55.8-24.6 18.9-50.8 46.9-50.8 68.7v489c0 29.2 26.4 72.4 62.8 72.4h5.2l4.5-2.5c0.7-0.4 70.6-39.4 139.6-80.3 40.7-24.1 73.1-44.2 96.5-59.7 14.4-9.5 25.2-17.2 33-23.4 10-8 19.6-16.7 19.6-28.8z m-40-6.2c-7.7 7-36.1 28.6-139.1 89.4-53.3 31.4-105.3 60.8-122.8 70.6-3.3-1.6-7.1-5.1-10.5-9.8-5.7-7.8-8.7-17-8.7-21.7V300c1.7-5 13.3-22.2 39.3-41.3 21.4-15.6 57.4-36.1 107.6-44.9 24.3-3.1 92.2-5.6 121.1 19.7 8.9 7.8 13 17.4 13 30.3v395.6z" fill="#333333" p-id="1335"></path><path d="M109 264H69v427.4l75.7 75.7 28.3-28.3-64-64z m815.3 0v410.8l-64 64 28.3 28.3 75.7-75.7V264zM248.736 386.422l13.112-37.788 144.539 50.153-13.112 37.788z m-7.098 186.321l13.112-37.788 144.539 50.154-13.112 37.788z m389.465-173.962l144.554-50.153 13.112 37.792-144.554 50.153z m7.099 186.309l144.554-50.153 13.112 37.792-144.554 50.153z" fill="#333333" p-id="1336"></path></svg>'
+                item.append(img);
+                item.append(detail);
+                item.classList.add('class-item');
+                class_list.append(item);
+            }
+        }
+        const class_item = document.querySelectorAll('.class-item');
+        for(let v of class_item){
+            let date = v.children[1].children[1].innerHTML;
+            let date_begin = +date.substr(0,2)*60 + +date.substr(3,2) - 6*60;
+            let date_long = +date.substr(6,2)*60 + +date.substr(9,2) - date_begin - 6*60;
+            v.style.height = date_long/60 *120 + 'px';
+            v.style.top = date_begin/60*120 + 60 +'px';
+        }
+    })();
 </script>
 </html>

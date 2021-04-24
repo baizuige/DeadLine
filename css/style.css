@@ -7,14 +7,15 @@
     padding: 0;
     font-family: DroidSansMono;
     user-select:none;
-    outline: 1px solid #ff0000;
+    /* outline: 1px solid #ff0000; */
 }
 body{
     min-height: 100vh;
     display: flex;
 }
 nav{
-    width: 216px;
+    min-width: 216px;
+    width: 13%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -119,6 +120,9 @@ main .main{
 }
 .main .main-left,.main .main-right{
     width: 47%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .main .main-header{
     display: flex;
@@ -161,8 +165,25 @@ main .main{
     fill: currentColor;
 }
 .main-left .timetable{
-    height: 500px;
-    overflow:scroll;
+    height: 0px;
+    /* flex: 0.98; */
+    overflow:hidden scroll;
+    position: relative;
+    margin-top: 20px;
+    /* scrollbar-width */
+}
+
+.timetable::-webkit-scrollbar {
+    width:9px;
+}
+/* 滚动槽 */
+.timetable::-webkit-scrollbar-track {
+    /* border: 1px solid #ccc; */
+}
+/* 滚动条滑块 */
+.timetable::-webkit-scrollbar-thumb {
+    border-radius:10px;
+    background:rgba(0,0,0,0.1);
 }
 .main-left .timetable ul{
     list-style: none;
@@ -171,15 +192,66 @@ main .main{
     height: 120px;
     display: flex;
     align-items: center;
+    font-size: 24px;
+}
+.timetable ul li div:nth-of-type(1){
+    width: 12%;
 }
 .timetable ul li div:nth-of-type(2){
-    margin-left: 20px;
+    /* margin-left: 20px; */
     height: 1px;
-    width: 300px;
+    flex: 1;
+    box-sizing: border-box;
+    margin: 0 5%;
+    /* width: 80%; */
     background: #000;
 }
+.timetable .class-list{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    /* background: rgba(0,0,0,0.5); */
+}
+.class-list .class-item{
+    width: 70%;
+    height: 90px;
+    border-radius: 16px;
+    position: absolute;
+    top: 0;
+    /* left: 20%; */
+    right: 9%;
+    background: #999;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+}
+.class-item .class-img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #ccc;
+    margin: 0 15px;
+    box-sizing: border-box;
+}
+.class-item .class-detail{
+    height: 50px;   
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.class-detail .class-title{
+    font-size: 20px;
+    font-weight: bold;
+}
+.class-detail .class-time{
+    font-size: 14px;
+    font-weight:lighter;
+}
 footer{
-    width: 218px;
+    min-width: 256px;
+    width: 16%;
     box-sizing: border-box;
     border-left: 2px solid #bdc3c7;
 }
