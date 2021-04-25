@@ -249,6 +249,12 @@ main .main{
     font-size: 14px;
     font-weight:lighter;
 }
+.class-room{
+    flex: 1;
+    text-align: center;
+    /* padding: 0 20px; */
+    font-size: 18px;
+}
 footer{
     min-width: 256px;
     width: 16%;

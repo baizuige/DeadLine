@@ -4,34 +4,94 @@ let app = express();
 const post = 8090;
 
 let classlist = {
-    '20210426':[{
+    '1':[{
         id:1,
         classname:'概率论',
-        time:'10:00-10:45'
+        time:'10:00-10:45',
+        room:'东教学楼2'
     },
     {
         id:2,
         classname:'概率论',
-        time:'10:55-11:40'
+        time:'10:55-11:40',
+        room:'东教学楼2'
     },
     {
         id:3,
         classname:'IT英语',
-        time:'14:30-15:15'
+        time:'14:30-15:15',
+        room:'实验楼517'
     },{
         id:4,
         classname:'IT英语',
-        time:'15:25-16:10'
+        time:'15:25-16:10',
+        room:'实验楼517'
     },{
         id:5,
         classname:'背单词',
         time:'06:00-06:30'
     }],
+    '2':[{
+        id:1,
+        classname:'算法',
+        time:'08:00-08:45',
+        room:'实验楼402'
+    },{
+        id:2,
+        classname:'算法',
+        time:'08:55-09:40',
+        room:'实验楼402'
+    }],
+    '3':[{
+        id:1,
+        classname:'思想概论',
+        time:'14:30-15:15',
+        room:'实验楼906'
+    },{
+        id:2,
+        classname:'思想概论',
+        time:'15:25-16:10',
+        room:'实验楼906'
+    }],
+    '4':[{
+        id:1,
+        classname:'算法',
+        time:'14:30-15:15',
+        room:'实验楼402'
+    },{
+        id:2,
+        classname:'算法',
+        time:'15:25-16:10',
+        room:'实验楼402'
+    }],
+    '5':[{
+        id:1,
+        classname:'思想概论',
+        time:'08:00-08:45',
+        room:'实验楼906'
+    },
+    {
+        id:2,
+        classname:'思想概论',
+        time:'08:55-09:40',
+        room:'实验楼906'
+    },{
+        id:1,
+        classname:'编译原理',
+        time:'10:00-10:45',
+        room:'实验楼402'
+    },
+    {
+        id:2,
+        classname:'编译原理',
+        time:'10:55-11:40',
+        room:'实验楼402'
+    }]
 }
 app.get('/classlist',(rep,res)=>{
-    let date = rep.query.date;
+    let day = rep.query.day;
     res.header('Access-Control-Allow-Origin','*');
-    let data = JSON.stringify(classlist[date]);
+    let data = JSON.stringify(classlist[day]);
     res.send(data);
 })
 
